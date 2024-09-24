@@ -1,17 +1,20 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 from pymongo import MongoClient
 from datetime import datetime
-# starting
+
 app = Flask(__name__)
 
 # Set up MongoDB connection
-client = MongoClient('mongodb+srv://harshit:DLRz4pAWxixsT7Km@cluster0.hr2xd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
-db = client['github_events']  # Create a database called "github_events"
-collection = db['events']  # Collection to store GitHub events
+#client = MongoClient('mongodb+srv://harshit:DLRz4pAWxixsT7Km@cluster0.hr2xd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+client=MongoClient('mongodb+srv://harshitjain20apr:DpXyJQdoxQcDBpY7@cluster2.1irja.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2')
+db = client['github_events']  # Create a database  called "github_events"
+collection = db['events']  # Collection to store GitHub eventsd
+
 
 # Serve plain text on the home route
 @app.route('/')
 def index():
+    return render_template('index.html')
     return '''
     <h1>Recent GitHub Events</h1>
     <ul id="events"></ul>
